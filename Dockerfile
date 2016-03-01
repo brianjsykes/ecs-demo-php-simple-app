@@ -1,6 +1,7 @@
 FROM ubuntu:12.04
 
-RUN chmod 755 /usr/bin/dpkg
+# Avoid ERROR: invoke-rc.d: policy-rc.d denied execution of start.
+RUN echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d
 # Install dependencies
 RUN apt-get update -y
 RUN apt-get install -y git curl apache2 php5 libapache2-mod-php5 php5-mcrypt php5-mysql
